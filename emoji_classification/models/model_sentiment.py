@@ -1,5 +1,29 @@
+from turtle import forward
 import torch
 import torch.nn as nn
+
+
+class CNNBlock(nn.Module):
+    
+    def __init__(self, in_channels, out_channels):
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+
+        super().__init__()
+
+
+        self.block = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, (3, 3), padding=1),
+            nn.LeakyReLU(),
+            nn.BatchNorm2d(out_channels),
+            nn.Conv2d(out_channels, out_channels, (3, 3), stride = 2, padding = 1),
+            nn.LeakyReLU(),
+            nn.BatchNorm2d(out_channels)
+        )
+
+    def forward(self, x):
+        y= self.block(x)
+        return y
 
 
 class SequenceClassifier(nn.Module):
@@ -19,6 +43,7 @@ class SequenceClassifier(nn.Module):
         self.dropout_p = dropout_p
 
         super().__init__()
+
 
         self.rnn = nn.LSTM(
             input_size=input_size,
@@ -40,16 +65,11 @@ class SequenceClassifier(nn.Module):
         # |x| = (batch_size, h, w)
 
         z, _ = self.rnn(x)
-        # |z| = (batch_size, h, hidden_size * 2)
-        # output : output, (hidden state, cell state)
-        # 여기서는 output만 받기
+
 
         z = z[:, -1]
-        # |z| = (batch_size, hidden_size * 2)
-        
 
         y = self.layers(z)
-        # |y| = (batch_size, output_size)
 
         return y
 
