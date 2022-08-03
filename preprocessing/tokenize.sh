@@ -12,10 +12,10 @@ cat ${FILENAME}.text | mecab -O wakati > ${FILENAME}.text.tok
 
 
 subword-nmt learn-bpe -s ${N_SYMBOLS} < ${FILENAME}.text.tok > ${MODEL_FILENAME}
-subword-nmt apply-bpe -c ${MODEL_FILENAME} < ${FILENAME}.text.tok > ${TARGET_FILENAME}.text.tok
+subword-nmt apply-bpe -c ${MODEL_FILENAME} < ${FILENAME}.text.tok > ${FILENAME}.text.tok.bpe
 
 #./learn_bpe.py -s 30000 < ${FILENAME}.text.tok > ../emoji_classification/models/bpe_model
 #./apply_bpe.py -c ../../emoji_classification/models/bpe_model < ${FILENAME}.text.tok > ${TARGET_FILENAME}.text.tok
 
 
-paste ${FILENAME}.text.tok ${FILENAME}.label > ${TARGET_FILENAME}
+paste ${FILENAME}.label ${FILENAME}.text.tok.bpe > ${TARGET_FILENAME}
