@@ -1,7 +1,5 @@
 from torchtext.legacy import data
 
-
-
 class DataLoader(object):
 
     def __init__(
