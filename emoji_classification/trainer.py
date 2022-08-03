@@ -44,7 +44,7 @@ class MyEngine(Engine):
         engine.model.train() # Because we assign model as class variable, we can easily access to it.
         engine.optimizer.zero_grad()
 
-        x, y = mini_batch
+        x, y = mini_batch.text, mini_batch.label
         x, y = x.to(engine.device), y.to(engine.device)
 
         # Take feed-forward
@@ -62,13 +62,6 @@ class MyEngine(Engine):
 
         p_norm = float(get_parameters_norm(engine.model.parameters()))
         g_norm = float(get_grad_norm(engine.model.parameters()))
-
-        if engine.config.max_grad > 0:
-            torch_utils.clip_grad_norm_(
-                engine.model.parameters(),
-                engine.config.max_grad,
-                norm_type=2,
-            )
 
         # Take a step of gradient descent.
         engine.optimizer.step()
