@@ -78,7 +78,7 @@ class MyEngine(Engine):
         engine.model.eval()
 
         with torch.no_grad():
-            x, y = mini_batch
+            x, y = mini_batch.text, mini_batch.label
             x, y = x.to(engine.device), y.to(engine.device)
 
             y_hat = engine.model(x)
