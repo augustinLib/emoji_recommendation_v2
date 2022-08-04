@@ -235,6 +235,7 @@ cython_debug/
 # Ignore data folder
 data/
 test.py
+train.ipynb
 
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,jupyternotebooks,visualstudiocode
