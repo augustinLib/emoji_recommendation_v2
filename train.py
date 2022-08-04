@@ -3,13 +3,14 @@ import argparse
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torchtext.legacy import data
 
 from emoji_classification.trainer import Trainer
 from emoji_classification.loader import DataLoader
 
 from emoji_classification.models.model_sentiment import EmojiClassifier
 
+# for CLI
+'''
 def define_hyperparameter():
 
     p = argparse.ArgumentParser()
@@ -35,6 +36,42 @@ def define_hyperparameter():
     config = p.parse_args()
 
     return config
+'''
+
+# for colab
+class Configure():
+    def __init__(self,
+                 model_fn,
+                 train_fn,
+                 gpu_id = -1,
+                 verbose = 2,
+                 min_vocab_freq = 5,
+                 max_vocab_size = 999999,
+                 batch_size = 512,
+                 n_epochs = 50,
+                 word_vec_size = 256,
+                 dropout = 0.3,
+                 max_length = 256,
+                 hidden_size = 512,
+                 n_layers = 4
+                 ):
+        
+        self.model_fn = model_fn
+        self.train_fn = train_fn
+        self.gpu_id = gpu_id
+        self.verbose = verbose
+        self.min_vocab_freq = min_vocab_freq
+        self.max_vocab_size = max_vocab_size
+        self.batch_size = batch_size
+        self.n_epochs = n_epochs
+        self.word_vec_size = word_vec_size
+        self.dropout = dropout
+        self.max_length = max_length
+        self.hidden_size = hidden_size
+        self.n_layers = n_layers
+
+
+
 
 def main(config):
     loaders = DataLoader(
@@ -93,11 +130,23 @@ def main(config):
 
 
 if __name__ == '__main__':
-
-    config = define_hyperparameter()
+    # for terminel
+    #config = define_hyperparameter()
+    
+    #for colab
+    config = Configure(
+        model_fn="./emoji_classification/models/epoch20_wordvec128.pth",
+        train_fn="./data/sentimental.tok.bpe.tsv",
+        gpu_id = 0,
+        verbose = 2,
+        min_vocab_freq = 5,
+        max_vocab_size = 999999,
+        batch_size = 256,
+        n_epochs = 50,
+        word_vec_size = 256,
+        dropout = 0.3,
+        max_length = 256,
+        hidden_size = 512,
+        n_layers = 4
+    )
     main(config)
-
-
-
-
-
