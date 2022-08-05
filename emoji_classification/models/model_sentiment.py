@@ -12,9 +12,9 @@ class EmojiClassifier(nn.Module):
         n_layers=4,
         dropout_p=.3,
         # 몇 개의 단어를 보는 filter를 형성할 것인지
-        filter_sizes = [2,3,4],
+        filter_sizes = [3,4],
         # 몇 개의 패턴을 볼 것인지
-        n_filters = [70, 70, 70]
+        n_filters = [20, 20]
     ):
         # assign
         self.input_size = input_size
@@ -39,8 +39,9 @@ class EmojiClassifier(nn.Module):
                         in_channels = 1, out_channels = n_filter,
                         kernel_size = (filter_size, word_vec_size)
                     ),
-                    nn.LeakyReLU(),
+                    #nn.LeakyReLU(),
                     nn.BatchNorm2d(n_filter)
+                    
                 )
             )
         
