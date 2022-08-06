@@ -239,4 +239,6 @@ data/
 #ignore ipynb
 *.ipynb
 
+.idea/
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,jupyternotebooks,visualstudiocode
