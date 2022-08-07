@@ -1,5 +1,6 @@
 #from torchtext.legacy import data
 from torchtext.legacy import data
+from torchtext.vocab import Vectors
 
 class DataLoader(object):
 
@@ -19,13 +20,17 @@ class DataLoader(object):
 
         super().__init__()
         
+        fast_vector = Vectors(name="./emoji_classification/models/fasttext_w2v")
+
+
         #Field 정의
         self.label = data.Field(
             # class만 있기 때문에 non-sequential
             sequential = False,
             use_vocab = True,
             # 모르는 class가 있으면 안됨
-            unk_token = False
+            unk_token = False,
+            is_target=True
         )
 
         self.text = data.Field(
@@ -65,7 +70,7 @@ class DataLoader(object):
         # label에 대한 vocabulary
         self.label.build_vocab(train)
         # text에 대한 vocabulary
-        self.text.build_vocab(train, max_size=max_vocab, min_freq=min_freq)
+        self.text.build_vocab(train, max_size=max_vocab, min_freq=min_freq, vectors=fast_vector)
 
 
 

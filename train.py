@@ -10,7 +10,7 @@ from emoji_classification.loader import DataLoader
 from emoji_classification.models.model_sentiment import EmojiClassifier
 
 # for CLI
-'''
+
 def define_hyperparameter():
 
     p = argparse.ArgumentParser()
@@ -20,25 +20,26 @@ def define_hyperparameter():
     p.add_argument('--gpu_id', type = int, default = -1)
     p.add_argument('--verbose', type = int, default=2)
 
-    p.add_argument('--min_vocab_freq', type = int, default = 5)
+    p.add_argument('--min_vocab_freq', type = int, default = 4)
     p.add_argument('--max_vocab_size', type = int, default=999999)
 
     p.add_argument('--batch_size', type=int, default=256)
-    p.add_argument('--n_epochs', type=int, default=10)
+    p.add_argument('--n_epochs', type=int, default=15)
 
-    p.add_argument('--word_vec_size', type = int, default = 256)
-    p.add_argument('--dropout', type=float, default=.3)
+    p.add_argument('--word_vec_size', type = int, default = 128)
+    p.add_argument('--dropout', type=float, default=.5)
     p.add_argument('--max_length', type=int, default=256)
 
-    p.add_argument('--hidden_size', type=int, default=512)
-    p.add_argument('--n_layers', type=int, default=4)
+    p.add_argument('--hidden_size', type=int, default=16)
+    p.add_argument('--n_layers', type=int, default=2)
 
     config = p.parse_args()
 
     return config
-'''
+
 
 # for colab
+'''
 class Configure():
     def __init__(self,
                  model_fn,
@@ -69,6 +70,7 @@ class Configure():
         self.max_length = max_length
         self.hidden_size = hidden_size
         self.n_layers = n_layers
+'''
 
 
 
@@ -131,9 +133,10 @@ def main(config):
 
 if __name__ == '__main__':
     # for terminel
-    #config = define_hyperparameter()
+    config = define_hyperparameter()
     
     #for colab
+    '''
     config = Configure(
         model_fn="./emoji_classification/models/epoch20_wordvec128.pth",
         train_fn="./data/sentimental.tok.bpe.tsv",
@@ -148,5 +151,7 @@ if __name__ == '__main__':
         max_length = 256,
         hidden_size = 512,
         n_layers = 4
+        
     )
+    '''
     main(config)
