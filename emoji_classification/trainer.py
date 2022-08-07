@@ -156,6 +156,7 @@ class MyEngine(Engine):
 
     @staticmethod
     def save_model(engine, train_engine, config, **kwargs):
+
         torch.save(
             {
                 'model': engine.best_model,
@@ -163,6 +164,7 @@ class MyEngine(Engine):
                 **kwargs
             }, config.model_fn
         )
+
 
 
 class Trainer():
