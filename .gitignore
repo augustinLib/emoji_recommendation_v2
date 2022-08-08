@@ -242,6 +242,6 @@ data/
 .idea/
 *.pth
 *.pt
-*.w2v
+fasttext_w2v
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,jupyternotebooks,visualstudiocode
