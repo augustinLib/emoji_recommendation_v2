@@ -9,12 +9,12 @@ class EmojiClassifier(nn.Module):
         word_vec_size,
         hidden_size,
         num_class,
-        n_layers=4,
-        dropout_p=.3,
+        n_layers=3,
+        dropout_p=.5,
         # 몇 개의 단어를 보는 filter를 형성할 것인지
-        filter_sizes = [2,3,4],
+        filter_sizes = [3,4,5],
         # 몇 개의 패턴을 볼 것인지
-        n_filters = [8, 4, 2]
+        n_filters = [70, 70, 70]
     ):
         # assign
         self.input_size = input_size
