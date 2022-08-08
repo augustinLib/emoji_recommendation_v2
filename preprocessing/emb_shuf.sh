@@ -1,0 +1,1 @@
+shuf ./data/embed_train.tsv > ./data/embed_train.shuf.tsv
