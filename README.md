@@ -3,7 +3,7 @@
 
 ## 프로젝트 소개 </br>
 ### 개요
-![introduce1](./etc/%08introduce1.png)
+![introduce1](./etc/introduce1.png)
 <b> 이모티콘(emoticon) </b></br> 
 문자를 이용하여 만들어낸 감정을 나타내는 기호들을 일컫는다.
 
